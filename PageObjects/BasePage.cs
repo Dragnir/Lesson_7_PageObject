@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Lesson_7_PageObject.PageObjects
 {
-    class BasePage
+    public class BasePage
     {
         protected By _titleLocator;
         protected string _title;
@@ -22,7 +22,9 @@ namespace Lesson_7_PageObject.PageObjects
 
         public void AssertIsOpen()
         {
-           
+            var label = new BaseElement(_titleLocator, _title);
+            label.WaitForIsVisible();
         }
+
     }
 }
