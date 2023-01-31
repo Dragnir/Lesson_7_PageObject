@@ -46,10 +46,29 @@ namespace Lesson_7_PageObject.PageObjects
             });
         }
 
+        public void WebElementClickable()
+        {
+            var wait = new WebDriverWait(_driver, new TimeSpan(0, 0, 5));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(_locator));
+        }
+
+        public void WebElementExist()
+        {
+            var wait = new WebDriverWait(_driver, new TimeSpan(0, 0, 5));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(_locator));
+        }
+
         public void Click()
         {
             WaitForIsVisible();
             Browser.GetDriver().FindElement(_locator).Click();
+        }
+
+        public void JsClick()
+        {
+            this.WaitForIsVisible();
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)Browser.GetDriver();
+            executor.ExecuteScript("arguments[0].click();", this.GetWebElement());
         }
 
         public void SendKeys(string text)

@@ -1,11 +1,6 @@
 ﻿using Lesson_7_PageObject.PageObjects;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Lesson_7_PageObject.Tests
 {
@@ -15,6 +10,7 @@ namespace Lesson_7_PageObject.Tests
         private LoginPage _loginPage;
         private MailPage _mailPage;
         private string userName = "vadim.kuryan.vka";
+        private string password = "Vka_6463296";
 
         [Test]
         public void SendMailTest()
@@ -23,11 +19,13 @@ namespace Lesson_7_PageObject.Tests
             _homePage.GoToLogin();
             _loginPage = new LoginPage();
             _loginPage.SetLogin(userName);
-            _loginPage.SetPassword("Vka_6463296");
+            _loginPage.SetPassword(password);
             _loginPage.SignIn();
             _mailPage = new MailPage();
             //Assert.AreEqual(userName, _mailPage.GetAccountName());
-            _mailPage.WriteNewMail();
+            _mailPage.WriteNewMail("dragnir@tut.by", "TestSubject", "TestBody");
+            _mailPage.SaveMailAsDraft();
+            _mailPage.GoToDraftFolder();
             Thread.Sleep(2000);
         }
     }

@@ -10,22 +10,40 @@ namespace Lesson_7_PageObject.PageObjects
 
         private readonly BaseElement _userAccount = new BaseElement(By.CssSelector("[class = 'user-account__name']"));
         private readonly BaseElement _writeNewMail = new BaseElement(By.CssSelector("[class = 'Button2 Button2_type_link Button2_view_action Button2_size_m Layout-m__compose--pTDsx qa-LeftColumn-ComposeButton ComposeButton-m__root--fP-o9']"));
-        private readonly BaseElement _passwordField = new BaseElement(By.CssSelector("[name = 'passwd']"));
-        private readonly BaseElement _signIn = new BaseElement(By.CssSelector("[id = 'passp:sign-in']"));
+        private readonly BaseElement _addressField = new BaseElement(By.XPath("//*[@id='compose-field-1']"));
+        private readonly BaseElement _subject = new BaseElement(By.XPath("//*[@id='compose-field-subject-4']"));
+        private readonly BaseElement _body = new BaseElement(By.XPath("//*[@id='cke_1_contents']/div"));
+        private readonly BaseElement _saveAsDraft = new BaseElement(By.XPath("//*[@class='Button2-Icon new__icon--1nFOX']/ancestor::button"));
+        private readonly BaseElement _sendToday = new BaseElement(By.XPath("//*[@class='ComposeTimeOptions-Label']"));
+        private readonly BaseElement _closeMail = new BaseElement(By.XPath("//*[@class='Button2 Button2_view_clear Button2_size_xs ControlButtons__root--3tqjs qa-ControlButton qa-ControlButton_button_close']"));
+        private readonly BaseElement _draftFolder = new BaseElement(By.XPath("//a[@href='#draft']"));
+        private readonly BaseElement _refresh = new BaseElement(By.XPath("//button[@aria-describedby='tooltip-0-2']"));
 
         public string GetAccountName()
         {
-            return _userAccount.GetText();
+            return _userAccount.Text;
         }
 
-        public void WriteNewMail()
+        public void WriteNewMail(string address, string subject, string body)
         {
             _writeNewMail.Click();
+            _addressField.SendKeys(address);
+            _subject.SendKeys(subject);
+            _body.SendKeys(body);
         }
 
-        public void SignIn()
+        public void SaveMailAsDraft()
         {
-            _signIn.Click();
+            _saveAsDraft.Click();
+            _sendToday.WebElementClickable();
+            _sendToday.JsClick();
+            _closeMail.Click();
+        }
+
+        public void GoToDraftFolder()
+        {
+            _draftFolder.Click();
+            _refresh.Click();
         }
     }
 }
