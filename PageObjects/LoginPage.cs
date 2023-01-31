@@ -12,6 +12,7 @@ namespace Lesson_7_PageObject.PageObjects
         private readonly BaseElement _setPassword = new BaseElement(By.CssSelector("[id = 'passp:sign-in']"));
         private readonly BaseElement _passwordField = new BaseElement(By.CssSelector("[name = 'passwd']"));
         private readonly BaseElement _signIn = new BaseElement(By.CssSelector("[id = 'passp:sign-in']"));
+        public BaseElement _errorMesage = new BaseElement(By.XPath("//*[text()='Incorrect password']"));
 
         public void SetLogin(string loginName)
         {

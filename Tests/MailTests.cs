@@ -13,7 +13,7 @@ namespace Lesson_7_PageObject.Tests
         private string password = "Vka_6463296";
 
         [Test]
-        public void SendMailTest()
+        public void SendDraftedMailTest()
         {
             _homePage = new HomePage();
             _homePage.GoToLogin();
@@ -28,6 +28,34 @@ namespace Lesson_7_PageObject.Tests
             Assert.IsTrue(_mailPage._dratedMail.WebElementExist());
             _mailPage._dratedMail.Click();
             Assert.IsTrue(_mailPage._savedMail.WebElementExist());
+            _mailPage._sendMail.Click();
+            _mailPage._sendFolder.Click();
+            Assert.IsTrue(_mailPage._savedMail.WebElementExist());
+        }
+
+        [Test]
+        public void WrongPasswordTest()
+        {
+            _homePage = new HomePage();
+            _homePage.GoToLogin();
+            _loginPage = new LoginPage();
+            _loginPage.SetLogin(userName);
+            _loginPage.SetPassword("incorrectPassword");
+            _loginPage.SignIn();
+            Assert.IsTrue(_loginPage._errorMesage.WebElementExist());
+        }
+
+        [Test]
+        public void SendMailTest()
+        {
+            _homePage = new HomePage();
+            _homePage.GoToLogin();
+            _loginPage = new LoginPage();
+            _loginPage.SetLogin(userName);
+            _loginPage.SetPassword(password);
+            _loginPage.SignIn();
+            _mailPage = new MailPage();
+            _mailPage.WriteNewMail("dragnir@tut.by", "TestSubject", "TestBody");
             _mailPage._sendMail.Click();
             _mailPage._sendFolder.Click();
             Assert.IsTrue(_mailPage._savedMail.WebElementExist());
