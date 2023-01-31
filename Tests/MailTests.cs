@@ -22,11 +22,15 @@ namespace Lesson_7_PageObject.Tests
             _loginPage.SetPassword(password);
             _loginPage.SignIn();
             _mailPage = new MailPage();
-            //Assert.AreEqual(userName, _mailPage.GetAccountName());
             _mailPage.WriteNewMail("dragnir@tut.by", "TestSubject", "TestBody");
             _mailPage.SaveMailAsDraft();
             _mailPage.GoToDraftFolder();
-            Thread.Sleep(2000);
+            Assert.IsTrue(_mailPage._dratedMail.WebElementExist());
+            _mailPage._dratedMail.Click();
+            Assert.IsTrue(_mailPage._savedMail.WebElementExist());
+            _mailPage._sendMail.Click();
+            _mailPage._sendFolder.Click();
+            Assert.IsTrue(_mailPage._savedMail.WebElementExist());
         }
     }
 }

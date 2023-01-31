@@ -18,7 +18,11 @@ namespace Lesson_7_PageObject.PageObjects
         private readonly BaseElement _closeMail = new BaseElement(By.XPath("//*[@class='Button2 Button2_view_clear Button2_size_xs ControlButtons__root--3tqjs qa-ControlButton qa-ControlButton_button_close']"));
         private readonly BaseElement _draftFolder = new BaseElement(By.XPath("//a[@href='#draft']"));
         private readonly BaseElement _refresh = new BaseElement(By.XPath("//button[@aria-describedby='tooltip-0-2']"));
-
+        public BaseElement _dratedMail = new BaseElement(By.XPath("//*[@title='TestSubject']"));
+        public BaseElement _savedMail = new BaseElement(By.XPath("//*[text()='TestBody']"));
+        public BaseElement _sendMail = new BaseElement(By.XPath("//button[@aria-disabled='false']"));
+        public BaseElement _sendFolder = new BaseElement(By.XPath("//a[@href='#sent']"));
+        
         public string GetAccountName()
         {
             return _userAccount.Text;

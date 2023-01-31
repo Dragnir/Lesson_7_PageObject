@@ -52,10 +52,10 @@ namespace Lesson_7_PageObject.PageObjects
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(_locator));
         }
 
-        public void WebElementExist()
+        public bool WebElementExist()
         {
             var wait = new WebDriverWait(_driver, new TimeSpan(0, 0, 5));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(_locator));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(_locator)).Enabled; 
         }
 
         public void Click()
