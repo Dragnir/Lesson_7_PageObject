@@ -1,17 +1,12 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lesson_7_PageObject.PageObjects
 {
     public class HomePage : BasePage
     {
-        private static readonly By HomeLnl = By.ClassName("");
+        private static readonly By HomeLnl = By.CssSelector("[class = 'Text Text_typography_headline-l Text_font_wide Text_weight_bold Heading_3bI30R6mTguZO_iUkHjmha']");
 
-        public HomePage() : base(HomeLnl, "") {}
+        public HomePage() : base(HomeLnl, "Yandex Mail") {}
 
         private readonly BaseElement _loginButton = new BaseElement(By.XPath("//*[text()='Log in']/ancestor::button"));
 
@@ -19,6 +14,5 @@ namespace Lesson_7_PageObject.PageObjects
         {
             _loginButton.Click();
         }
-
     }
 }
